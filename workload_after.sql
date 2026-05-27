@@ -45,7 +45,7 @@ WHERE email = 'Rosa.larsen72834@shop.net';
 
 -- ===== 006 =====
 SELECT book_id, title, SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2024-11-01' AND order_date < '2024-12-01'
 GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
@@ -90,7 +90,7 @@ WHERE email = 'pablo.ueda23655@books.io';
 
 -- ===== 014 =====
 SELECT book_id, title, SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2024-12-01' AND order_date < '2025-01-01'
 GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
@@ -179,7 +179,7 @@ WHERE email = 'yusuf.ivanov113057@shop.net';
 SELECT DISTINCT r.user_id, r.book_id
 FROM reviews r
 WHERE EXISTS (
-    SELECT 1 FROM order_items_books_rev o
+    SELECT 1 FROM orders_items_books o
     WHERE o.user_id = r.user_id AND o.book_id = r.book_id
 )
   AND r.review_date >= '2023-11-01' AND r.review_date < '2023-12-01';
@@ -233,7 +233,7 @@ ORDER BY title LIMIT 25;
 
 -- ===== 037 =====
 SELECT book_id, title, SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2023-04-01' AND order_date < '2023-05-01'
 GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
@@ -315,14 +315,14 @@ WHERE email = 'quincy.kowalski107841@shop.net';
 -- ===== 051 =====
 SELECT genre, DATE_TRUNC('month', order_date) AS month,
        SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2022-12-01' AND order_date < '2023-12-01'
 GROUP BY genre, DATE_TRUNC('month', order_date)
 ORDER BY month, revenue DESC;
 
 -- ===== 052 =====
 SELECT book_id, title, SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2024-02-01' AND order_date < '2024-03-01'
 GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
@@ -331,7 +331,7 @@ ORDER BY revenue DESC LIMIT 10;
 SELECT DISTINCT r.user_id, r.book_id
 FROM reviews r
 WHERE EXISTS (
-    SELECT 1 FROM order_items_books_rev o
+    SELECT 1 FROM orders_items_books o
     WHERE o.user_id = r.user_id AND o.book_id = r.book_id
 )
   AND r.review_date >= '2022-03-01' AND r.review_date < '2022-04-01';
@@ -393,7 +393,7 @@ ORDER BY review_date DESC LIMIT 20;
 -- ===== 064 =====
 SELECT genre, DATE_TRUNC('month', order_date) AS month,
        SUM(quantity * unit_price) AS revenue
-FROM order_items_books_rev
+FROM orders_items_books
 WHERE order_date >= '2022-12-01' AND order_date < '2023-12-01'
 GROUP BY genre, DATE_TRUNC('month', order_date)
 ORDER BY month, revenue DESC;
@@ -507,12 +507,10 @@ WHERE u.is_premium = TRUE
 ORDER BY o.order_date DESC;
 
 -- ===== 084 =====
-SELECT b.book_id, b.title, SUM(oi.quantity * oi.unit_price) AS revenue
-FROM orders o
-JOIN order_items oi ON oi.order_id = o.order_id
-JOIN books b        ON b.book_id   = oi.book_id
-WHERE o.order_date >= '2023-10-01' AND o.order_date < '2023-11-01'
-GROUP BY b.book_id, b.title
+SELECT book_id, title, SUM(quantity * unit_price) AS revenue
+FROM orders_items_books
+WHERE order_date >= '2023-10-01' AND order_date < '2023-11-01'
+GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
 
 -- ===== 085 =====
@@ -524,12 +522,10 @@ WHERE genre = 'scifi'
 ORDER BY publication_year DESC, price ASC LIMIT 50;
 
 -- ===== 086 =====
-SELECT b.book_id, b.title, SUM(oi.quantity * oi.unit_price) AS revenue
-FROM orders o
-JOIN order_items oi ON oi.order_id = o.order_id
-JOIN books b        ON b.book_id   = oi.book_id
-WHERE o.order_date >= '2023-08-01' AND o.order_date < '2023-09-01'
-GROUP BY b.book_id, b.title
+SELECT book_id, title, SUM(quantity * unit_price) AS revenue
+FROM orders_items_books
+WHERE order_date >= '2023-08-01' AND order_date < '2023-09-01'
+GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
 
 -- ===== 087 =====
@@ -608,10 +604,8 @@ SET stock_count = stock_count - 1, last_updated = CURRENT_TIMESTAMP
 WHERE book_id = 26315 AND warehouse_id = 8;
 
 -- ===== 100 =====
-SELECT b.book_id, b.title, SUM(oi.quantity * oi.unit_price) AS revenue
-FROM orders o
-JOIN order_items oi ON oi.order_id = o.order_id
-JOIN books b        ON b.book_id   = oi.book_id
-WHERE o.order_date >= '2022-09-01' AND o.order_date < '2022-10-01'
-GROUP BY b.book_id, b.title
+SELECT book_id, title, SUM(quantity * unit_price) AS revenue
+FROM orders_items_books
+WHERE order_date >= '2022-09-01' AND order_date < '2022-10-01'
+GROUP BY book_id, title
 ORDER BY revenue DESC LIMIT 10;
