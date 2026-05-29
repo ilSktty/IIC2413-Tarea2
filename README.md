@@ -18,7 +18,7 @@ Para crear la base de datos, cargarla y medir los tiempos de ejecucion de consul
 2. ``psql -d bookstore_g5 -f schema.sql``
 3. ``psql -d bookstore_g5 -f load.sql``
 4. `py run_workload.py --csv times_baseline.csv --db bookstore_g5`  
-*(correr 2 veces este comando para medir en caliente)*
+*(correr 2 veces este comando para medir en caliente, ya que los tiempos de ejecución varían de gran manera entre cada repetición)*
 
 5. `psql -d bookstore_g5 -f matview.sql`
 6. `psql -d bookstore_g5 -f indexes.sql`
