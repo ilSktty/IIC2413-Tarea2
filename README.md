@@ -1,9 +1,10 @@
 # IIC2413-Tarea2
-Tarea n°2 de Base de Datos 2026-1.
+Bases de Datos 2026-1.
+Fecha de entrega: 28/05/2026 20:00
 
 Integrantes:
-- Scarlette
 - Matilde Baeza
+- Scarlette Carter
 - Sofía Guzmán
 - Joaquín Toro
 
@@ -21,5 +22,7 @@ Para crear la base de datos, cargarla y medir los tiempos de ejecucion de consul
 
 5. `psql -d bookstore_g5 -f matview.sql`
 6. `psql -d bookstore_g5 -f indexes.sql`
-7. `py run_workload.py --csv times_after.csv --db bookstore_g5 --workload workload_after.sql` 
+7. `py run_workload.py --csv times_after.csv --db bookstore_g5 --workload workload_after.sql`   
 *(correr 2 veces este comando para medir en caliente)*
+
+De esta manera, los tiempos de ejecución de todas las consultas quedan registrados en los archivos `times_baseline.csv` y `times_after.csv`.
